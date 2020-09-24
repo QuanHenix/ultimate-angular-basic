@@ -8,11 +8,11 @@
       "baggage": ""
     },
     {
+      "fullname": "Ronald Weasley",
       "id": 2,
-      "fullname": "Ron Weasley",
       "checkedIn": true,
-      "checkInDate": 1491742000000,
-      "baggage": "none"
+      "baggage": "hold-only",
+      "checkInDate": 1600965352692
     },
     {
       "id": 3,
