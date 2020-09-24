@@ -53,9 +53,7 @@ export class PassengerDetailComponent implements OnChanges, OnInit {
     }
   }
 
-  ngOnInit() {
-    console.log("on Init");
-  }
+  ngOnInit() {}
 
   onNameChange(value: string) {
     this.detail.fullname = value;
@@ -63,7 +61,6 @@ export class PassengerDetailComponent implements OnChanges, OnInit {
 
   toogleEditing() {
     if (this.editing) {
-      console.log("on toogleEditing : " + this.detail.fullname);
       this.edit.emit(this.detail);
     }
     this.editing = !this.editing;

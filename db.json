@@ -1,1 +1,30 @@
-{}
+{
+  "passengers": [
+    {
+      "id": 1,
+      "fullname": "Harry Potter",
+      "checkedIn": true,
+      "checkInDate": 1490742000000,
+      "children": null
+    },
+    {
+      "id": 2,
+      "fullname": "Ron Weasley",
+      "checkedIn": false,
+      "checkInDate": 1491742000000,
+      "children": [
+        {
+          "name": "Hugo",
+          "age": 7
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "fullname": "Hermione Granger",
+      "checkedIn": true,
+      "checkInDate": 1492742000000,
+      "children": null
+    }
+  ]
+}

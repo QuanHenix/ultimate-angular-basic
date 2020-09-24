@@ -5,7 +5,7 @@ import { Passenger } from "../../models/passenger.inteface";
   selector: "passenger-count",
   styleUrls: ["passenger-count.component.scss"],
   template: `
-    <div>Checked-in Passenger: {{ getCheckedIn() }}/{{ items.length }}</div>
+    <div>Checked-in Passenger: {{ getCheckedIn() }}/{{ items?.length }}</div>
   `,
 })
 export class PassengerCountComponent {

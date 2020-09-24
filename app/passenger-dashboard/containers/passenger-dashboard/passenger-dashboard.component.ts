@@ -1,5 +1,4 @@
 import { Component, OnChanges, OnInit } from "@angular/core";
-import { filter } from "core-js/fn/array";
 import { Passenger } from "../../models/passenger.inteface";
 import { PassengerDashboardService } from "../../passenger-dashboard.service";
 
@@ -22,35 +21,38 @@ import { PassengerDashboardService } from "../../passenger-dashboard.service";
     </div>
   `,
 })
-export class PassengerDashboardComponent implements OnInit, OnChanges {
+export class PassengerDashboardComponent implements OnInit {
   passengers: Passenger[];
   constructor(private passengerDashboardService: PassengerDashboardService) {}
   ngOnInit() {
-    this.passengers = this.passengerDashboardService.getPassengers();
+    this.passengerDashboardService
+      .getPassengers()
+      .subscribe((data: Passenger[]) => (this.passengers = data));
   }
 
   handleRemove(event: Passenger) {
-    this.passengers = this.passengers.filter((p: Passenger) => {
-      return p.id !== event.id;
-    });
+    this.passengerDashboardService
+      .deletePassenger(event)
+      .subscribe((data: Passenger) => {
+        this.passengers = this.passengers.filter((p: Passenger) => {
+          return p.id !== event.id;
+        });
+      });
   }
 
   handleEdit(event: Passenger) {
-    this.passengers = this.passengers.map((p: Passenger) => {
-      if (p.id === event.id) {
-        p = Object.assign({}, p, event);
+    this.passengerDashboardService.updatePassengers(event).subscribe(
+      (data: Passenger) => {
+        this.passengers = this.passengers.map((p: Passenger) => {
+          if (p.id === data.id) {
+            p = Object.assign({}, p, event);
+          }
+          return p;
+        });
+      },
+      (error: any) => {
+        console.log("error:" + error);
       }
-      return p;
-    });
-
-    // let newPassengerIndex = this.passengers.findIndex(
-    //   (p: Passenger) => p.id === event.id
-    // );
-    // this.passengers[newPassengerIndex] = event;
-    console.log(this.passengers);
-  }
-
-  ngOnChanges(changes: any) {
-    console.log("on father changes : " + this.passengers);
+    );
   }
 }
