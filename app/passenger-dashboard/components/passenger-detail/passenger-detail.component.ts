@@ -27,7 +27,6 @@ import { Passenger } from "../../models/passenger.inteface";
             : "not check in!"
         }}
       </div>
-      <div class="children">Children: {{ detail.children?.length || 0 }}</div>
       <button (click)="toogleEditing()">
         {{ editing ? "Done" : "Edit" }}
       </button>

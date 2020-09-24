@@ -5,7 +5,11 @@ import { PassengerDashboardService } from "../../passenger-dashboard.service";
 @Component({
   selector: "passenger-viewer",
   styleUrls: ["passenger-viewer.component.scss"],
-  template: ` <div>Viewer: {{ passenger | json }}</div> `,
+  template: `
+    <div>
+      <passenger-form [detail]="passenger"></passenger-form>
+    </div>
+  `,
 })
 export class PassengerViewerComponent implements OnInit {
   passenger: Passenger;
