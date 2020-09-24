@@ -1,4 +1,5 @@
 import { Component, Input } from "@angular/core";
+import { Baggage } from "../../models/baggage.inteface";
 import { Passenger } from "../../models/passenger.inteface";
 
 @Component({
@@ -19,26 +20,14 @@ import { Passenger } from "../../models/passenger.inteface";
       <div>
         <label>
           <input
-            type="radio"
-            [value]="true"
+            type="checkbox"
             name="checkedIn"
             [ngModel]="detail?.checkedIn"
             (ngModelChange)="toggleCheckIn($event)"
           />
           Yes
         </label>
-        <label>
-          <input
-            type="radio"
-            [value]="false"
-            name="checkedIn"
-            [ngModel]="detail?.checkedIn"
-            (ngModelChange)="toggleCheckIn($event)"
-          />
-          No
-        </label>
       </div>
-
       <div *ngIf="form.value.checkedIn">
         Check in date:
         <input
@@ -47,6 +36,19 @@ import { Passenger } from "../../models/passenger.inteface";
           [ngModel]="detail?.checkInDate"
         />
       </div>
+
+      <div>
+        Luggage
+        <select name="baggage" [ngModel]="detail?.baggage">
+          <option
+            *ngFor="let item of baggage"
+            [value]="item.key"
+            [selected]="item.key === detail?.baggage"
+          >
+            {{ item.value }}
+          </option>
+        </select>
+      </div>
       {{ form.value | json }}
     </form>
   `,
@@ -54,6 +56,26 @@ import { Passenger } from "../../models/passenger.inteface";
 export class PassengerFormComponent {
   @Input()
   detail: Passenger;
+
+  baggage: Baggage[] = [
+    {
+      key: "none",
+      value: "no baggage",
+    },
+    {
+      key: "hand-only",
+      value: "hand baggage",
+    },
+    {
+      key: "hold-only",
+      value: "hold baggage",
+    },
+    {
+      key: "hand-hold",
+      value: "hand and hold baggage",
+    },
+  ];
+
   toggleCheckIn(checkedIn: boolean) {
     if (checkedIn) {
       this.detail.checkInDate = +new Date();
